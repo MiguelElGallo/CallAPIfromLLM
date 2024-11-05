@@ -1,4 +1,5 @@
 import unittest
+from openai import OpenAI
 from weather_cli import ask_gpt
 
 class TestWeatherCLI(unittest.TestCase):
