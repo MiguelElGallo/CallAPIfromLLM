@@ -7,7 +7,7 @@ This repository contains a command line utility that uses the Azure OpenAI GPT-4
 
 ### Prerequisites
 
-- Python 3.6 or higher
+- Python 3.11 or higher
 - Install the required libraries:
   ```sh
   pip install openmeteo-requests requests-cache retry-requests numpy pandas
@@ -40,7 +40,7 @@ This will fetch and display the weather data for the specified location.
 
 To create a virtual environment, run the following command:
 ```sh
-python -m venv .venv
+python3.11 -m venv .venv
 ```
 
 To activate the virtual environment, use the following command:
