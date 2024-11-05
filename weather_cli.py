@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import os
 import argparse
-import openai
+from openai import OpenAI
 import json
 from datetime import datetime
 
@@ -44,8 +44,7 @@ def process_weather_data(response):
     print(hourly_dataframe)
 
 def ask_gpt(question):
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    openai.api_base = os.getenv("OPENAI_API_URL")
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), api_base=os.getenv("OPENAI_API_URL"))
     
     tools = [
         {
@@ -77,7 +76,7 @@ def ask_gpt(question):
         {"role": "user", "content": question}
     ]
     
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=messages,
         functions=tools
@@ -103,7 +102,7 @@ def ask_gpt(question):
         messages.append(response.choices[0].message)
         messages.append(function_call_result_message)
         
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=messages
         )
