@@ -35,3 +35,20 @@ python weather_cli.py 52.52 13.41
 ```
 
 This will fetch and display the weather data for the specified location.
+
+### Virtual Environment Setup
+
+To create a virtual environment, run the following command:
+```sh
+python -m venv .venv
+```
+
+To activate the virtual environment, use the following command:
+```sh
+source .venv/bin/activate
+```
+
+To install the required libraries, run:
+```sh
+pip install -r requirements.txt
+```
