@@ -1,0 +1,11 @@
+promptflow
+promptflow-tools
+promptflow-azure
+promptflow-core
+openmeteo-requests
+requests-cache 
+retry-requests 
+numpy 
+pandas
+pytest
+mypy

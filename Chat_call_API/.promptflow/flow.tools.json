@@ -1,0 +1,33 @@
+{
+  "package": {},
+  "code": {
+    "chat.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        },
+        "question": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "chat.jinja2"
+    },
+    "use_function.py": {
+      "type": "python",
+      "inputs": {
+        "response_message": {
+          "type": [
+            "object"
+          ]
+        }
+      },
+      "source": "use_function.py",
+      "function": "temperature_tool"
+    }
+  }
+}

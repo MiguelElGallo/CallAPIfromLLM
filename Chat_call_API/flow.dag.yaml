@@ -1,0 +1,76 @@
+id: call_weather_api
+name: Ask the model to call the weather API
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    default:
+    - inputs:
+        question: What is the weather for longitute 30 and latitude 40?
+      outputs:
+        answer: '{"temperature":"10"}'
+        llm_output:
+          content: null
+          function_call:
+            name: temperature_tool
+            arguments: |-
+              {
+                "latitude": "30"
+                "longitude": "40"
+              }
+          role: assistant
+    is_chat_input: false
+    is_chat_history: true
+  question:
+    type: string
+    default: What is the weather for longitute 30 and latitude 40?
+    is_chat_input: true
+outputs:
+  answer:
+    type: string
+    reference: ${temperature_tool.output}
+    is_chat_output: true
+  llm_output:
+    type: object
+    reference: ${temperature_tool.output}
+nodes:
+- name: temperature_tool
+  type: python
+  source:
+    type: code
+    path: use_function.py
+    response_message: ${chat.output}
+  inputs:
+    response_message: ${chat.output}
+  use_variants: false
+- name: chat
+  type: llm
+  source:
+    type: code
+    path: chat.jinja2
+  inputs:
+    deployment_name: gpt-4
+    max_tokens: 256
+    temperature: 0.7
+    functions:
+    - name: temperature_tool
+      description: Get the temperature for a given location
+      parameters:
+        type: object
+        properties:
+          latitude:
+            type: string
+            description: The latitude of the location
+          longitude:
+            type: string
+            description: The longitude of the location
+        required:
+        - latitude
+        - longitude
+    function_call: auto
+    chat_history: ${inputs.chat_history}
+    question: ${inputs.question}
+  connection: miguel_azure_open_ai
+  api: chat
