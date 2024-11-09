@@ -4,7 +4,7 @@ Chat flow is designed for conversational application development, building upon 
 
 In this simple example it is illustrated how you can tell a model to call a Python function, which in turn calls an API from <https://api.open-meteo.com/v1/forecast>
 
-The Python code for that function and API call is here: [](Chat_call_API/test_use_function.py)
+The Python code for that function and API call is here: [use_function](Chat_call_API/use_function.py)
 
 ## Create connection for LLM tool to use
 
