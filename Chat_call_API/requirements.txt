@@ -19,6 +19,8 @@ argcomplete==3.5.3
     # via promptflow-devkit
 asgiref==3.8.1
     # via opentelemetry-instrumentation-asgi
+async-timeout==5.0.1
+    # via aiohttp
 attrs==25.1.0
     # via
     #   aiohttp
@@ -30,7 +32,7 @@ azure-ai-ml==1.25.0
     # via promptflow-azure
 azure-common==1.1.28
     # via azure-ai-ml
-azure-core==1.32.0
+azure-core[aio]==1.32.0
     # via
     #   azure-ai-ml
     #   azure-core-tracing-opentelemetry
@@ -58,7 +60,7 @@ azure-monitor-opentelemetry-exporter==1.0.0b33
     # via
     #   azure-monitor-opentelemetry
     #   promptflow-devkit
-azure-storage-blob==12.24.1
+azure-storage-blob[aio]==12.24.1
     # via
     #   azure-ai-ml
     #   azure-storage-file-datalake
@@ -95,6 +97,7 @@ cryptography==44.0.1
     #   msal
     #   promptflow-devkit
     #   pyjwt
+    #   secretstorage
 deprecated==1.2.18
     # via
     #   opentelemetry-api
@@ -104,6 +107,11 @@ distro==1.9.0
     # via openai
 docstring-parser==0.16
     # via promptflow-core
+exceptiongroup==1.3.0
+    # via
+    #   anyio
+    #   cattrs
+    #   pytest
 fastapi==0.115.8
     # via promptflow-core
 filelock==3.17.0
@@ -135,6 +143,8 @@ google-search-results==2.4.1
     # via promptflow-tools
 googleapis-common-protos==1.67.0
     # via opentelemetry-exporter-otlp-proto-http
+greenlet==3.2.3
+    # via sqlalchemy
 h11==0.14.0
     # via httpcore
 httpcore==1.0.7
@@ -151,6 +161,7 @@ idna==3.10
     #   yarl
 importlib-metadata==8.5.0
     # via
+    #   flask
     #   keyring
     #   opentelemetry-api
 importlib-resources==6.5.2
@@ -168,6 +179,10 @@ itsdangerous==2.2.0
     # via flask
 jaraco-classes==3.4.0
     # via keyring
+jeepney==0.9.0
+    # via
+    #   keyring
+    #   secretstorage
 jinja2==3.1.5
     # via flask
 jiter==0.8.2
@@ -206,12 +221,12 @@ multidict==6.1.0
     #   aiohttp
     #   yarl
 mypy==1.15.0
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 mypy-extensions==1.0.0
     # via mypy
-numpy==2.2.3
+numpy==2.0.2
     # via
-    #   -r requirements.in
+    #   -r Chat_call_API/requirements.in
     #   pandas
 oauthlib==3.2.2
     # via requests-oauthlib
@@ -220,7 +235,7 @@ openai==1.63.0
     #   promptflow-tools
     #   promptflow-tracing
 openmeteo-requests==1.3.0
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 openmeteo-sdk==1.18.6
     # via openmeteo-requests
 opentelemetry-api==1.30.0
@@ -323,7 +338,7 @@ packaging==24.2
     #   pytest
 pandas==2.2.3
     # via
-    #   -r requirements.in
+    #   -r Chat_call_API/requirements.in
     #   promptflow-devkit
 pillow==11.0.0
     # via promptflow-devkit
@@ -335,13 +350,13 @@ portalocker==2.10.1
     # via msal-extensions
 promptflow==1.17.2
     # via
-    #   -r requirements.in
+    #   -r Chat_call_API/requirements.in
     #   promptflow-tools
 promptflow-azure==1.17.2
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 promptflow-core==1.17.2
     # via
-    #   -r requirements.in
+    #   -r Chat_call_API/requirements.in
     #   promptflow
     #   promptflow-devkit
 promptflow-devkit==1.17.2
@@ -349,7 +364,7 @@ promptflow-devkit==1.17.2
     #   promptflow
     #   promptflow-azure
 promptflow-tools==1.5.0
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 promptflow-tracing==1.17.2
     # via
     #   promptflow
@@ -378,13 +393,15 @@ pydash==7.0.7
     # via
     #   azure-ai-ml
     #   promptflow-devkit
-pyjwt==2.10.1
+pygments==2.19.1
+    # via pytest
+pyjwt[crypto]==2.10.1
     # via
     #   azure-ai-ml
     #   msal
     #   promptflow-azure
-pytest==8.3.4
-    # via -r requirements.in
+pytest==8.4.0
+    # via -r Chat_call_API/requirements.in
 python-dateutil==2.9.0.post0
     # via
     #   pandas
@@ -417,11 +434,11 @@ requests==2.32.3
     #   retry-requests
     #   tiktoken
 requests-cache==1.2.1
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 requests-oauthlib==2.0.0
     # via msrest
 retry-requests==2.0.0
-    # via -r requirements.in
+    # via -r Chat_call_API/requirements.in
 rpds-py==0.22.3
     # via
     #   jsonschema
@@ -430,6 +447,8 @@ ruamel-yaml==0.18.10
     # via promptflow-core
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
+secretstorage==3.3.3
+    # via keyring
 six==1.17.0
     # via
     #   azure-core
@@ -453,6 +472,10 @@ tabulate==0.9.0
     # via promptflow-devkit
 tiktoken==0.9.0
     # via promptflow-tracing
+tomli==2.2.1
+    # via
+    #   mypy
+    #   pytest
 tqdm==4.67.1
     # via
     #   azure-ai-ml
@@ -460,6 +483,7 @@ tqdm==4.67.1
 typing-extensions==4.12.2
     # via
     #   anyio
+    #   asgiref
     #   azure-ai-ml
     #   azure-core
     #   azure-cosmos
@@ -467,7 +491,10 @@ typing-extensions==4.12.2
     #   azure-storage-blob
     #   azure-storage-file-datalake
     #   azure-storage-file-share
+    #   cattrs
+    #   exceptiongroup
     #   fastapi
+    #   multidict
     #   mypy
     #   openai
     #   opentelemetry-sdk
@@ -476,6 +503,7 @@ typing-extensions==4.12.2
     #   pydash
     #   referencing
     #   sqlalchemy
+    #   starlette
 tzdata==2025.1
     # via pandas
 url-normalize==1.4.3
@@ -500,4 +528,6 @@ wrapt==1.17.2
 yarl==1.18.3
     # via aiohttp
 zipp==3.21.0
-    # via importlib-metadata
+    # via
+    #   importlib-metadata
+    #   importlib-resources
